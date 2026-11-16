@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Read the data and skip the first 8 rows 
 df = pd.read_csv("STATIC_INFLATIONCALC.csv", skiprows=8)
@@ -79,7 +80,7 @@ cpi1 = df.loc[date1, "cpi"]
 cpi2 = df.loc[date2, "cpi"]
 
 # 4 major calculations (assume a annual inflation rate)
-price2 = price1 * (cpi2 / cpi1)
+price2 = np.round(price1 * (cpi2 / cpi1), 2) # Numpy rounding
 percent_change = ((cpi2 - cpi1) / cpi1) * 100
 years = ((date2.year - date1.year) * 12 + (date2.month - date1.month)) / 12
 avg_inf_rate = ((cpi2 / cpi1) ** (1 / years) - 1) * 100
